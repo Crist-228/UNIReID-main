@@ -1,0 +1,17 @@
+# data/*
+**.pth
+**.pt
+
+**/data/
+
+**/archive/
+
+**.out
+**/__pycache__/
+
+.vscode/
+.pycharm/
+
+data/*
+sketch/*
+sketch.zip
