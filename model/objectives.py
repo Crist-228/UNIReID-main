@@ -114,7 +114,7 @@ def compute_itc(image_features, text_features, logit_scale):
     image_norm = image_features / image_features.norm(dim=-1, keepdim=True)
     text_norm = text_features / text_features.norm(dim=-1, keepdim=True)
 
-    # cosine similarity as logits
+    # cosine similarity as logits .t() 是一个 PyTorch 操作，用于对张量（tensor）执行转置操作。
     logits_per_image = logit_scale * image_norm @ text_norm.t()
     logits_per_text = logits_per_image.t()
 
@@ -233,6 +233,7 @@ def compute_itc_focal3(image_features, text_features, simage_features, fusion_fe
     # kl = F.kl_div(logits_per_text1.softmax(dim=-1).log(), logits_per_text0.detach().softmax(dim=-1), reduction='sum') + F.kl_div(logits_per_text0.softmax(dim=-1).log(), logits_per_text1.detach().softmax(dim=-1), reduction='sum')
 
     loss = focal_loss_two(loss_it, loss_is, alpha, gamma) + loss_if + klp*(CoRefineLoss(logits_per_text1, logits_per_text0.detach()))
+    # loss = focal_loss_two(loss_it, loss_is, alpha, gamma) + loss_if 这个就是Ldynamic
  
     return loss
 

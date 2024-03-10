@@ -78,7 +78,8 @@ class CUHKPEDES(BaseDataset):
                 img_path = op.join(self.img_dir, anno['file_path'])
                 captions = anno['captions'] # caption list
                 # if pid not in pid_container:
-                simg_path = op.join(self.simg_dir, anno['file_path'])
+                # simg_path = op.join(self.simg_dir, anno['file_path'])
+                simg_path = op.join(self.simg_dir, anno['file_path'].replace('.bmp', '.jpg'))
                 pid_container.add(pid)
 
                 for caption in captions:
@@ -118,7 +119,8 @@ class CUHKPEDES(BaseDataset):
                 image_ids.append(image_id)
            
                 # if pid not in pid_container:
-                simg_path =  op.join(self.simg_dir, anno['file_path']) 
+                # simg_path =  op.join(self.simg_dir, anno['file_path']) 
+                simg_path = op.join(self.simg_dir, anno['file_path'].replace('.bmp', '.jpg'))
                     #  simage_id = image_id
                     #  simage_pid = pid
 

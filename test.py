@@ -20,7 +20,7 @@ from utils.iotools import load_train_configs
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="TranTextReID Text")
-    parser.add_argument("--config_file", default='/data1/ccq/multimodality-ICFG/ICFG-PEDES/20221008_110136_sketch2_text_itcloss/configs.yaml')
+    parser.add_argument("--config_file", default='/data/wenjunying/UNIReID/multimodality-RSTPReid/RSTPReid/20240308_221517_Ls_addfusion_itc/configs.yaml')
     args = parser.parse_args()
     args = load_train_configs(args.config_file)
  
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     test_img_loader, test_txt_loader, test_sketch_loader = build_dataloader(args)
     model = build_model(args)
     checkpointer = Checkpointer(model)
-    checkpointer.load(f=op.join(args.output_dir, 'text_best.pth'))
+    checkpointer.load(f=op.join(args.output_dir, 'fusion_best.pth'))
     model.to(device)
     
     do_inference(args, model, test_img_loader, test_txt_loader, test_sketch_loader)

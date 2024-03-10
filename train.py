@@ -1,6 +1,6 @@
 import os
 import os.path as op
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '4,5,6,7'
 import torch
 import numpy as np
 import random

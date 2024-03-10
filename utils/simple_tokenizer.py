@@ -60,6 +60,7 @@ def whitespace_clean(text):
 
 
 class SimpleTokenizer(object):
+    #SimpleTokenizer 类提供了一个根据字节对编码（BPE）规则将文本分解为token的方法，这对于很多NLP任务来说是一个基本且关键的步骤。
     def __init__(self, bpe_path: str = default_bpe()):
         self.byte_encoder = bytes_to_unicode()
         self.byte_decoder = {v: k for k, v in self.byte_encoder.items()}

@@ -126,10 +126,11 @@ def do_train(start_epoch, args, model, train_loader, evaluator, optimizer,
                     arguments4["epoch"] = epoch
                     checkpointer.save("average_best", **arguments)
 
-    logger.info(f"text best R1: {best_ttop1} at epoch {arguments['epoch']}")
-    logger.info(f"sketch best R1: {best_stop1} at epoch {arguments2['epoch']}")
-    logger.info(f"fusion best R1: {best_itop1} at epoch {arguments3['epoch']}")
-    logger.info(f"average best R1: {best_ftop1} at epoch {arguments4['epoch']}")
+    if get_rank() == 0:
+        logger.info(f"text best R1: {best_ttop1} at epoch {arguments['epoch']}")
+        logger.info(f"sketch best R1: {best_stop1} at epoch {arguments2['epoch']}")
+        logger.info(f"fusion best R1: {best_itop1} at epoch {arguments3['epoch']}")
+        logger.info(f"average best R1: {best_ftop1} at epoch {arguments4['epoch']}")
 
 
 def do_inference(args, model, test_img_loader, test_txt_loader, test_sketch_loader):

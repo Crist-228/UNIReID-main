@@ -304,13 +304,13 @@ class CLIP2ReID(nn.Module):
                 si_feats = simage_feats[:, 0, :].float()
                 t_feats = text_feats[torch.arange(text_feats.shape[0]), caption_ids.argmax(dim=-1)].float() #[64, 512]
                 if self.args.only_fusion_loss:
-                    ret.update({'itc_loss':(objectives.compute_itc(i_feats, f_feats, logit_scale))*self.args.cmm_loss_weight})
+                    ret.update({'itc_loss':(objectives.compute_itc(i_feats, f_feats, logit_scale))*self.args.cmm_loss_weight})#with L f->r
                 elif self.args.four_fusion_loss:
                     ret.update({'itc_loss':(objectives.compute_itc(i_feats, t_feats, logit_scale) + objectives.compute_itc(i_feats, si_feats, logit_scale) + objectives.compute_itc(i_feats, f_feats, logit_scale)+objectives.compute_itc(si_feats, t_feats, logit_scale))*self.args.cmm_loss_weight})
                 elif self.args.focal_three_fusion_loss3:
-                    ret.update({'itc_loss':(objectives.compute_itc_focal3(i_feats, t_feats, si_feats, f_feats, logit_scale, self.args.al, self.args.ga, self.args.klp))*self.args.cmm_loss_weight})
+                    ret.update({'itc_loss':(objectives.compute_itc_focal3(i_feats, t_feats, si_feats, f_feats, logit_scale, self.args.al, self.args.ga, self.args.klp))*self.args.cmm_loss_weight})#with Lc
                 else:
-                    ret.update({'itc_loss':(objectives.compute_itc(i_feats, t_feats, logit_scale) + objectives.compute_itc(i_feats, si_feats, logit_scale) + objectives.compute_itc(i_feats, f_feats, logit_scale))*self.args.cmm_loss_weight})
+                    ret.update({'itc_loss':(objectives.compute_itc(i_feats, t_feats, logit_scale) + objectives.compute_itc(i_feats, si_feats, logit_scale) + objectives.compute_itc(i_feats, f_feats, logit_scale))*self.args.cmm_loss_weight})#with Ls
             else:
                 i_feats = image_feats[:, 0, :].float()
                 si_feats = simage_feats[:, 0, :].float()

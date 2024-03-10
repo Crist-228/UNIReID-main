@@ -7,7 +7,7 @@ def get_args():
     parser.add_argument("--local_rank", default=0, type=int)
     parser.add_argument("--name", default="baseline", help="experiment name to save")
     # parser.add_argument("--log_dir", default="logs")
-    parser.add_argument("--output_dir", default="/data/wenjunying/UNIReID/multimodality")
+    parser.add_argument("--output_dir", default="/data/wenjunying/UNIReID/multimodality-RSTPReid")
     # parser.add_argument("--gpu_id", default="0", help="select gpu to run")
     parser.add_argument("--log_period", default=100)
     parser.add_argument("--eval_period", default=1)
